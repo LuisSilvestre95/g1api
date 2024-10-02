@@ -13,8 +13,8 @@ class Connection
 
 		$infoDB = array(
 
-			"database" => "infos",
-			"user" => "root",
+			"database" => "u145597152_grupouno",
+			"user" => "u145597152_ugrupouno",
 			"pass" => ""
 
 		);
