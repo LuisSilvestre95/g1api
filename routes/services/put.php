@@ -94,6 +94,3 @@ if (isset($_GET["id"]) && isset($_GET["nameId"])) {
         return;
     }
 }
-?>
-/*COMENTARIO DE BRAYAN*/
-/*COMENTARIO 2*/
