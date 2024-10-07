@@ -27,7 +27,7 @@ Peticiones GET sin filtro entre tablas relacionadas
 
 }else if(isset($_GET["rel"]) && isset($_GET["type"]) && $table == "relations" && !isset($_GET["linkTo"]) && !isset($_GET["equalTo"])){
 
-	$response -> getRelData($_GET["rel"],$_GET["type"],$select,$equalTo,$orderBy,$orderMode,$startAt,$endAt);
+	$response -> getRelData($_GET["rel"],$_GET["type"],$select,$orderBy,$orderMode,$startAt,$endAt);
 	
 /*=============================================
 Peticiones GET con filtro entre tablas relacionadas
@@ -80,3 +80,12 @@ Peticiones GET para selección de rangos con relaciones
 
 
 }
+
+
+
+
+
+
+
+
+
