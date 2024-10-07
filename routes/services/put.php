@@ -94,5 +94,6 @@ if (isset($_GET["id"]) && isset($_GET["nameId"])) {
         return;
     }
 }
-?>
-/*HOLA MUNDO */
+
+/*BRAYAN es buenA PERSONA*/
+
