@@ -14,7 +14,7 @@ class Connection
 		$infoDB = array(
 
 			"database" => "u145597152_grupouno",
-			"user" => "u145597152_ugrupouno",
+			"user" => "u145597152_ugrupouno2",
 			"pass" => ""
 
 		);
