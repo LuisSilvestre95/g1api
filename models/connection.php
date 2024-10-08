@@ -14,7 +14,7 @@ class Connection{
 
 			"database" => "u145597152_grupouno2",
 			"user" => "u145597152_ugrupouno2",
-			"pass" => '1es[Em:$U>l'
+			"pass" => "1es[Em:$U>l"
 
 		);
 
