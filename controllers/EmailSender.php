@@ -22,13 +22,13 @@ class EmailSender
         $this->mailer->isSMTP();
         $this->mailer->Host       = 'smtp.hostinger.com';
         $this->mailer->SMTPAuth   = true;
-        $this->mailer->Username   = 'info@uptc.online';
-        $this->mailer->Password   = 'Correo.uptc.24';
+        $this->mailer->Username   = 'grupo1@ujdc.online';
+        $this->mailer->Password   = 'R?GOmZ|&U1:h';
         $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Cambia a SMTPS
         $this->mailer->Port       = 465;
         $this->mailer->CharSet    = 'UTF-8';
         $this->mailer->Timeout    = 30; // Añade un timeout
-        $this->mailer->setFrom('info@uptc.online', 'crediapp');
+        $this->mailer->setFrom('grupo1@ujdc.online', 'Consultoria UJDC');
         $this->mailer->isHTML(true);
     }
 
