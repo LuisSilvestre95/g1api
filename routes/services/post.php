@@ -5,64 +5,99 @@ require_once "controllers/post.controller.php";
 
 if (isset($_POST)) {
 
+
+
+
     /*=============================================
-    Separar propiedades en un arreglo
-    =============================================*/
+	Separar propiedades en un arreglo
+	=============================================*/
 
     $columns = array();
 
     foreach (array_keys($_POST) as $key => $value) {
+
         array_push($columns, $value);
     }
 
     /*=============================================
-    Validar la tabla y las columnas
-    =============================================*/
+	Validar la tabla y las columnas
+	=============================================*/
 
     if (empty(Connection::getColumnsData($table, $columns))) {
 
         $json = array(
             'status' => 400,
-            'results' => "Error: Los campos del formulario no coinciden con la base de datos"
+            'results' => "Error:Los campos del formulario no coinciden con la base de datos"
+
+
         );
 
         echo json_encode($json, http_response_code($json["status"]));
+
         return;
     }
 
     $response = new PostController();
 
     /*=============================================
-    Petición POST para registrar usuario
-    =============================================*/
+	Peticion POST para registrar usuario
+	=============================================*/
 
     if (isset($_GET["register"]) && $_GET["register"] == true) {
 
         $suffix = $_GET["suffix"] ?? "user";
+
         $response->postRegister($table, $_POST, $suffix);
 
-    /*=============================================
-    Petición POST para login de usuario
-    =============================================*/
-
+        /*=============================================
+	Peticion POST para login de usuario
+	=============================================*/
     } else if (isset($_GET["login"]) && $_GET["login"] == true) {
 
         $suffix = $_GET["suffix"] ?? "user";
-        $response->postLogin($table, $_POST, $suffix);
 
+        $response->postLogin($table, $_POST, $suffix);
+    }
+
+    /*=============================================
+    Peticion POST para solicitar código de recuperación
+    =============================================*/ else if (isset($_GET["passwordRecoveryRequest"]) && $_GET["passwordRecoveryRequest"] == true) {
+        $suffix = $_GET["suffix"] ?? "user";
+        $response->postPasswordRecoveryRequest($table, $_POST, $suffix);
+    }
+
+    /*=============================================
+    Peticion POST para verificar código de recuperación
+    =============================================*/
+    /*else if(isset($_GET["verifyRecoveryCode"]) && $_GET["verifyRecoveryCode"] == true){
+        $suffix = $_GET["suffix"] ?? "user";
+        $response->postVerifyRecoveryCode($table, $_POST, $suffix);
+    }*/ else if (isset($_GET["verifyRecoveryCode"]) && $_GET["verifyRecoveryCode"] == true) {
+        $suffix = $_GET["suffix"] ?? "user";
+        $response = new PostController();
+        $response->postVerifyRecoveryCode($table, $_POST, $suffix);
+        return;
+    }
+
+    /*=============================================
+    Peticion POST para cambiar contraseña
+    =============================================*/ else if (isset($_GET["changePassword"]) && $_GET["changePassword"] == true) {
+        $suffix = $_GET["suffix"] ?? "user";
+        $response->postChangePassword($table, $_POST, $suffix);
     } else {
+
 
         if (isset($_GET["token"])) {
 
             /*=============================================
-            Petición POST para usuarios no autorizados
-            =============================================*/
+			Peticion POST para usuarios no autorizados
+			=============================================*/
 
             if ($_GET["token"] == "no" && isset($_GET["except"])) {
 
                 /*=============================================
-                Validar la tabla y las columnas
-                =============================================*/
+				Validar la tabla y las columnas
+				=============================================*/
 
                 $columns = array($_GET["except"]);
 
@@ -74,19 +109,19 @@ if (isset($_POST)) {
                     );
 
                     echo json_encode($json, http_response_code($json["status"]));
+
                     return;
                 }
 
                 /*=============================================
-                Solicitamos respuesta del controlador para crear datos en cualquier tabla
-                =============================================*/
+				Solicitamos respuesta del controlador para crear datos en cualquier tabla
+				=============================================*/
 
                 $response->postData($table, $_POST);
 
-            /*=============================================
-            Petición POST para usuarios autorizados
-            =============================================*/
-
+                /*=============================================
+			Peticion POST para usuarios autorizados
+			=============================================*/
             } else {
 
                 $tableToken = $_GET["table"] ?? "users";
@@ -95,16 +130,17 @@ if (isset($_POST)) {
                 $validate = Connection::tokenValidate($_GET["token"], $tableToken, $suffix);
 
                 /*=============================================
-                Solicitamos respuesta del controlador para crear datos en cualquier tabla
-                =============================================*/
+				Solicitamos respuesta del controlador para crear datos en cualquier tabla
+				=============================================*/
 
                 if ($validate == "ok") {
+
                     $response->postData($table, $_POST);
                 }
 
                 /*=============================================
-                Error cuando el token ha expirado
-                =============================================*/
+				Error cuando el token ha expirado
+				=============================================*/
 
                 if ($validate == "expired") {
 
@@ -114,12 +150,13 @@ if (isset($_POST)) {
                     );
 
                     echo json_encode($json, http_response_code($json["status"]));
+
                     return;
                 }
 
                 /*=============================================
-                Error cuando el token no coincide en BD
-                =============================================*/
+				Error cuando el token no coincide en BD
+				=============================================*/
 
                 if ($validate == "no-auth") {
 
@@ -129,15 +166,14 @@ if (isset($_POST)) {
                     );
 
                     echo json_encode($json, http_response_code($json["status"]));
+
                     return;
                 }
-
             }
 
-        /*=============================================
-        Error cuando no envía token
-        =============================================*/
-
+            /*=============================================
+		Error cuando no envía token
+		=============================================*/
         } else {
 
             $json = array(
@@ -146,9 +182,8 @@ if (isset($_POST)) {
             );
 
             echo json_encode($json, http_response_code($json["status"]));
+
             return;
         }
-
     }
-
 }
