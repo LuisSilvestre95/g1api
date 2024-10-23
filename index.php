@@ -17,8 +17,7 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTION');
 header('Access-Control-Allow-Credentials:true');
 header('content-type: application/json; charset=utf-8');
-header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
-header('Content-Type: application/json; charset=utf-8');
+
 
 
 /*=============================================
