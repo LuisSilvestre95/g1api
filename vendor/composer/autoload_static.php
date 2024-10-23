@@ -30,7 +30,6 @@ class ComposerStaticInit2f6ec873b5f0716b5235eed5b27e71e5
             $loader->prefixLengthsPsr4 = ComposerStaticInit2f6ec873b5f0716b5235eed5b27e71e5::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit2f6ec873b5f0716b5235eed5b27e71e5::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInit2f6ec873b5f0716b5235eed5b27e71e5::$classMap;
-
         }, null, ClassLoader::class);
     }
 }
