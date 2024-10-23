@@ -11,7 +11,7 @@ use Firebase\JWT\JWT;
 
 require_once "EmailSender.php";
 
-require_once "email.php";
+//require_once "email.php";
 
 class PostController
 {
